@@ -8,7 +8,7 @@
 ---
 
 ## System Architecture
-
+``` 
 ╔══════════════════════════════════════════════════════════════╗
 ║                    A.E.G.I.S. V2 ARCHITECTURE                ║
 ╚══════════════════════════════════════════════════════════════╝
@@ -97,7 +97,7 @@
  Host PC registers keystroke/mouse click
      │
      Total: ~14ms end-to-end
-
+``` 
 ## Why float32 instead of INT8
 
 Standard TinyML uses INT8 quantisation to save SRAM. For this project, INT8 was deliberately rejected.
