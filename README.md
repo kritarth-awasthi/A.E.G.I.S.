@@ -1,4 +1,4 @@
-# A.E.G.I.S. V2
+# A.E.G.I.S.
 ### Articulated Electronic Gesture Inference System
 
 > Wearable edge-AI human-computer interface controller.  
