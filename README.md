@@ -1,112 +1,53 @@
-# A.E.G.I.S.
-### Articulated Electronic Gesture Inference System.
+# A.E.G.I.S. V2
+### Articulated Electronic Gesture Inference System
 
-> Wearable edge-AI human-computer interface controller.  
-> float32 CNN inference on ESP32 · FreeRTOS dual-core · ESP-NOW · USB HID  
-> **Status: Active Development**
+> Wearable edge-AI HCI controller. float32 CNN on ESP32 via FreeRTOS
+> dual-core isolation. ESP-NOW <2ms. USB HID driverless output. 98.2% accuracy.
+
+**Developer:** Kritarth Awasthi | BIT Mesra, Jaipur
+**Status:** Active development
 
 ---
 
 ## System Architecture
-``` 
-╔══════════════════════════════════════════════════════════════╗
-║                    A.E.G.I.S. V2 ARCHITECTURE                ║
-╚══════════════════════════════════════════════════════════════╝
 
-┌─────────────────────────────┐      ┌──────────────────────────┐
-│      HAND NODE              │      │     FOREARM NODE          │
-│   (Logic & Sensing)         │      │     (Power Supply)        │
-│                             │      │                           │
-│  ┌─────────────────────┐    │      │  ┌────────────────────┐   │
-│  │   ESP32-WROOM-32    │    │      │  │  18650 Li-Ion Cell │   │
-│  │   Dual-Core 240MHz  │    │      │  │     2000 mAh       │   │
-│  │                     │    │      │  └────────┬───────────┘   │
-│  │  Core 0 ──────────► │    │      │           │               │
-│  │  MPU6050 I2C @100Hz │    │      │  ┌────────▼───────────┐   │
-│  │  SDA → GPIO 22      │    │      │  │   TP4056 PMIC      │   │
-│  │  SCL → GPIO 21      │    │      │  │   USB-C Charging   │   │
-│  │                     │    │      │  └────────┬───────────┘   │
-│  │  Core 1 ──────────► │    │      │           │               │
-│  │  float32 CNN        │    │      │  ┌────────▼───────────┐   │
-│  │  150-frame window   │    │      │  │   SPDT Slide Switch│   │
-│  │  98.2% accuracy     │    │      │  │   (OUT+ line only) │   │
-│  └────────┬────────────┘    │      │  └────────┬───────────┘   │
-│           │                 │      │           │               │
-│  ┌────────▼────────────┐    │      │           │               │
-│  │  MPU6050 6-DOF IMU  │    │      └───────────┼───────────────┘
-│  │  Flat-mount (Z=1G)  │    │                  │
-│  └─────────────────────┘    │                  │ VIN
-└──────────┬──────────────────┘                  │
-           │                          ◄───────────┘
-           │ ESP-NOW (bare-metal)      Flexible wire tether
-           │ Peer-to-peer MAC target   (Split Architecture)
-           │ < 2ms latency
-           │ No TCP/IP stack
-           ▼
+```
+┌─────────────────────────────┐     ┌──────────────────────────┐
+│      HAND NODE               │     │     FOREARM NODE          │
+│   ESP32-WROOM-32             │     │     (Power Supply)        │
+│                              │     │                           │
+│  Core 0: MPU6050 @ 100Hz    │     │  18650 Li-Ion 2000mAh    │
+│  SDA→GPIO22 | SCL→GPIO21    │     │  TP4056 PMIC (USB-C)     │
+│                              │     │  SPDT Switch (OUT+ only) │
+│  Core 1: float32 CNN        │     │                           │
+│  150-frame window            │     └────────────┬─────────────┘
+│  92% confidence threshold    │                  │ VIN (flexible tether)
+│                              │◄─────────────────┘
+└──────────────┬───────────────┘
+               │ ESP-NOW (bare-metal, no TCP/IP)
+               │ Peer-to-peer MAC address
+               │ < 2ms latency
+               ▼
 ┌──────────────────────────────┐
-│      PC RECEIVER NODE        │
-│    ESP32-C3 Super Mini       │
-│    RISC-V Single Core        │
-│                              │
-│  Internal Wi-Fi Antenna      │
-│  ← receives ESP-NOW packet   │
-│                              │
-│  GPIO 18 (D-) ──────────┐   │
-│  GPIO 19 (D+) ──────────┼──► USB-C → Host PC
-│                          │   │
-│  Native USB HID output   │   │  Windows / macOS / Linux
-│  Keyboard + Mouse emul.  │   │  Zero drivers required
-└──────────────────────────┘   │  Plug-and-play
-                               │
-                    ┌──────────▼────────────┐
-                    │      HOST PC          │
-                    │                       │
-                    │  Sees AEGIS as a      │
-                    │  standard HID device  │
-                    │  14ms total latency   │
-                    └───────────────────────┘
+│   PC RECEIVER NODE           │
+│   ESP32-C3 Super Mini        │
+│   GPIO18(D-) GPIO19(D+)→USB │
+│   Native USB HID             │
+│   Zero drivers · Any OS     │
+└──────────────────────────────┘
+```
 
-──────────────────────────────────────────────────────────────
- DATA FLOW
-──────────────────────────────────────────────────────────────
+## Gesture → Keyboard Mapping
 
- Hand movement
-     │
-     ▼
- MPU6050 captures X,Y,Z accel + gyro @ 100Hz (Core 0)
-     │
-     ▼
- 150-frame sliding window buffer (1.5 seconds of data)
-     │
-     ▼
- DSP low-pass filter → removes tremor/noise
-     │
-     ▼
- float32 1D CNN inference (Core 1)
-     │
-     ▼
- Softmax confidence > 92% threshold
-     │
-     ▼
- ESP-NOW micro-packet → MAC address of C3 receiver
-     │                   < 2ms
-     ▼
- ESP32-C3 receives packet → injects USB HID interrupt
-     │
-     ▼
- Host PC registers keystroke/mouse click
-     │
-     Total: ~14ms end-to-end
-``` 
-## Why float32 instead of INT8
+| Gesture | HID Output | Future |
+|---|---|---|
+| Swipe Left | ← Arrow Key | Mouse left |
+| Swipe Right | → Arrow Key | Mouse right |
+| Swipe Up | ↑ Arrow Key | Scroll up |
+| Swipe Down | ↓ Arrow Key | Scroll down |
+| Rest | No action | — |
 
-Standard TinyML uses INT8 quantisation to save SRAM. For this project, INT8 was deliberately rejected.
-
-When the MPU6050 reads a 12.2° tilt and a 12.8° tilt, INT8 rounds both to 12. For gesture recognition where subtle wrist micro-movements map to precise inputs, that precision loss causes false positive triggers.
-
-float32 is 4x heavier on SRAM — offset entirely by FreeRTOS dual-core isolation. Core 0 and Core 1 never share compute, giving Core 1 100% headroom for float32 matrix multiplication.
-
-## Performance Metrics
+## Performance
 
 | Metric | Value |
 |---|---|
@@ -115,30 +56,63 @@ float32 is 4x heavier on SRAM — offset entirely by FreeRTOS dual-core isolatio
 | Inference Time | 2ms |
 | Peak RAM Usage | 1.6KB |
 | ESP-NOW Latency | <2ms |
-| Total Pipeline Latency | 14ms |
+| Total Pipeline | ~14ms |
 | Battery Life | 18+ hours |
 
-## Hardware
+## Why float32, Not INT8
 
-| Component | Role |
-|---|---|
-| ESP32-WROOM-32 | Transmitter — sensor polling + CNN inference |
-| MPU6050 6-DOF IMU | Kinetic telemetry (I2C: SDA→GPIO22, SCL→GPIO21) |
-| ESP32-C3 Super Mini | Receiver — USB HID emulation |
-| 18650 Li-Ion + TP4056 | Power — compression-fit harness, USB-C charging |
+INT8 quantisation rounds 12.2° and 12.8° wrist tilt to both 12.
+For a gesture controller mapping micro-movements to precise inputs,
+that aliasing causes false positive triggers. float32 preserves
+decimal precision. Memory cost offset by FreeRTOS core isolation —
+Core 0 handles sensor polling exclusively, Core 1 handles CNN
+inference exclusively. Neither ever blocks the other.
+
+## Repository Structure
+
+```
+A.E.G.I.S./
+├── transmitter_firmware/    ESP32-WROOM hand node
+│   └── aegis_transmitter/
+│       ├── aegis_transmitter.ino
+│       ├── config.h
+│       ├── imu_handler.h
+│       └── espnow_tx.h
+├── receiver_firmware/       ESP32-C3 USB dongle
+│   └── aegis_receiver/
+│       ├── aegis_receiver.ino
+│       ├── hid_mapper.h
+│       └── config_receiver.h
+├── ml_pipeline/             Data collection + training guide
+│   ├── collect_data.py
+│   └── README.md
+└── docs/
+    └── system_architecture.md
+```
+
+> **Note:** The trained float32 CNN model (`aegis_model.h`) is not
+> included in this public repository. See `ml_pipeline/README.md`
+> to train your own model via Edge Impulse.
+
+## Setup
+
+**Transmitter:**
+1. Install: `MPU6050 by Electronic Cats`, `ESP32 Arduino`
+2. Edit `config.h` → set `RECEIVER_MAC[]` from receiver Serial output
+3. Board: `ESP32 Dev Module` → Flash
+
+**Receiver:**
+1. Open receiver sketch → Flash → note MAC address from Serial
+2. Paste MAC into transmitter `config.h`
+3. Board: `ESP32C3 Dev Module` with `USB CDC On Boot: Enabled`
 
 ## Roadmap
 
 - [x] FreeRTOS dual-core architecture
-- [x] float32 CNN training on Edge Impulse
+- [x] float32 CNN inference pipeline
 - [x] ESP-NOW wireless bridge
-- [x] USB HID receiver
-- [ ] V2.1 miniaturisation — XIAO ESP32S3
+- [x] USB HID keyboard output
+- [ ] V2.1 — XIAO ESP32S3 miniaturisation
+- [ ] Mouse movement mode (pitch/roll → cursor)
 - [ ] Haptic feedback via LRAs
 - [ ] Flex sensor finger articulation
-
----
-*Lead Developer: Kritarth Awasthi | BIT Mesra, Jaipur*
-
-
-     
