@@ -1,5 +1,5 @@
 # A.E.G.I.S.
-### Articulated Electronic Gesture Inference System
+### Articulated Electronic Gesture Inference System.
 
 > Wearable edge-AI human-computer interface controller.  
 > float32 CNN inference on ESP32 · FreeRTOS dual-core · ESP-NOW · USB HID  
