@@ -2,7 +2,7 @@
 ### Articulated Electronic Gesture Inference System
 
 > Wearable edge-AI HCI controller. float32 CNN on ESP32 via FreeRTOS
-> dual-core isolation. ESP-NOW <2ms. USB HID driverless output. 98.2% accuracy.
+> dual-core isolation. ESP-NOW <2ms. USB HID driverless output. 98.2% accuracy
 
 **Developer:** Kritarth Awasthi | BIT Mesra, Jaipur
 **Status:** Active development
@@ -66,7 +66,7 @@ For a gesture controller mapping micro-movements to precise inputs,
 that aliasing causes false positive triggers. float32 preserves
 decimal precision. Memory cost offset by FreeRTOS core isolation —
 Core 0 handles sensor polling exclusively, Core 1 handles CNN
-inference exclusively. Neither ever blocks the other.
+inference exclusively. Neither ever blocks the other
 
 ## Repository Structure
 
