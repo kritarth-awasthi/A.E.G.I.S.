@@ -1,8 +1,8 @@
 # A.E.G.I.S.
-### Articulated Electronic Gesture Inference System
+### Articulated Electronic Gesture Inference System.
 
-> Wearable edge-AI HCI controller. float32 CNN on ESP32 via FreeRTOS
-> dual-core isolation. ESP-NOW <2ms. USB HID driverless output. 98.2% accuracy
+> Wearable edge-AI HCI controller. float32 CNN on ESP32 via FreeRTOS.
+> dual-core isolation. ESP-NOW <2ms. USB HID driverless output. 98.2% accuracy.
 
 **Developer:** Kritarth Awasthi | BIT Mesra, Jaipur
 **Status:** Active development
