@@ -66,7 +66,7 @@ For a gesture controller mapping micro-movements to precise inputs,
 that aliasing causes false positive triggers. float32 preserves
 decimal precision. Memory cost offset by FreeRTOS core isolation —
 Core 0 handles sensor polling exclusively, Core 1 handles CNN
-inference exclusively. Neither ever blocks the other
+inference exclusively. Neither ever blocks the other.
 
 ## Repository Structure
 
@@ -108,11 +108,11 @@ A.E.G.I.S./
 
 ## Roadmap
 
-- [x] FreeRTOS dual-core architecture
-- [x] float32 CNN inference pipeline
-- [x] ESP-NOW wireless bridge
-- [x] USB HID keyboard output
-- [ ] V2.1 — XIAO ESP32S3 miniaturisation
-- [ ] Mouse movement mode (pitch/roll → cursor)
-- [ ] Haptic feedback via LRAs
-- [ ] Flex sensor finger articulation
+- [x] FreeRTOS dual-core architecture.
+- [x] float32 CNN inference pipeline.
+- [x] ESP-NOW wireless bridge.
+- [x] USB HID keyboard output.
+- [ ] V2.1 — XIAO ESP32S3 miniaturisation.
+- [ ] Mouse movement mode (pitch/roll → cursor).
+- [ ] Haptic feedback via LRAs.
+- [ ] Flex sensor finger articulation.
