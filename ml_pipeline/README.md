@@ -1,4 +1,4 @@
-# AEGIS — ML Training Pipeline
+# A.E.G.I.S — ML Training Pipeline
 
 ## Training Workflow
 
