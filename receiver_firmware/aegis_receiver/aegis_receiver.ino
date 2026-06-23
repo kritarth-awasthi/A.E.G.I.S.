@@ -1,10 +1,10 @@
 /*
  * ╔══════════════════════════════════════════════════════════════╗
- * ║               A . E . G . I . S .   V 2                     ║
+ * ║               A . E . G . I . S .                            ║
  * ║                  Receiver — PC Dongle Node                   ║
  * ║                                                              ║
- * ║  Developer : Kritarth Awasthi | BIT Mesra, Jaipur           ║
- * ║  Hardware  : ESP32-C3 Super Mini (RISC-V)                   ║
+ * ║  Developer : Kritarth Awasthi                                ║
+ * ║  Hardware  : ESP32-C3 Super Mini (RISC-V)                    ║
  * ╚══════════════════════════════════════════════════════════════╝
  *
  *  ROLE: Wireless USB dongle. Plugs into PC USB-C port.
