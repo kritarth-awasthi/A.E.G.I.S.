@@ -1,22 +1,22 @@
 /*
  * ╔══════════════════════════════════════════════════════════════╗
- * ║               A . E . G . I . S .   V 2                     ║
+ * ║               A . E . G . I . S .                            ║
  * ║        Articulated Electronic Gesture Inference System       ║
  * ║                 Transmitter — Hand Node                      ║
  * ║                                                              ║
- * ║  Developer : Kritarth Awasthi | BIT Mesra, Jaipur           ║
- * ║  Hardware  : ESP32-WROOM-32 DevKit V1 (30-pin)              ║
+ * ║  Developer : Kritarth Awasthi                                ║
+ * ║  Hardware  : ESP32-WROOM-32 DevKit V1 (30-pin)               ║
  * ╚══════════════════════════════════════════════════════════════╝
  *
  *  CORE ARCHITECTURE:
  *  ┌──────────────────────────────────────────────────────┐
  *  │  Core 0 (imuTask)                                    │
- *  │  MPU6050 → I2C @ 100Hz → circular buffer            │
- *  │  SDA: GPIO22 | SCL: GPIO21 (custom routing)         │
+ *  │  MPU6050 → I2C @ 100Hz → circular buffer             │
+ *  │  SDA: GPIO22 | SCL: GPIO21 (custom routing)          │
  *  │                                                      │
  *  │  Core 1 (inferenceTask)                              │
- *  │  circular buffer → float32 CNN → confidence check   │
- *  │  → ESP-NOW packet → ESP32-C3 receiver dongle        │
+ *  │  circular buffer → float32 CNN → confidence check    │
+ *  │  → ESP-NOW packet → ESP32-C3 receiver dongle         │
  *  └──────────────────────────────────────────────────────┘
  *
  *  WHY float32 (NOT int8):
