@@ -37,25 +37,24 @@
 #include "imu_handler.h"
 #include "espnow_tx.h"
 
-// ── NOTE ON CNN MODEL ─────────────────────────────────────────────────────────
+// ── NOTE ON CNN MODEL 
 // The trained float32 TFLite model is NOT included in this public repository.
 // The model is compiled into a C++ header (aegis_model.h) via:
 //   Edge Impulse → Deployment → Arduino Library → float32 version
 // To train your own model: see ml_pipeline/collect_data.py + train_model.py
 // Include aegis_model.h and update gesture_engine.h inference calls accordingly
-// ─────────────────────────────────────────────────────────────────────────────
 
-// ── Global Objects ────────────────────────────────────────────────────────────
+// ── Global Objects 
 IMUHandler       imu;
 ESPNowTransmitter espnow;
 
-// ── Shared inference trigger flags ───────────────────────────────────────────
+// ── Shared inference trigger flags 
 volatile uint8_t  last_gesture    = GESTURE_REST;
 volatile float    last_confidence = 0.0f;
 volatile bool     gesture_ready   = false;
 portMUX_TYPE      gesture_mux     = portMUX_INITIALIZER_UNLOCKED;
 
-// ── CNN Input Buffer (flat float32 array) ────────────────────────────────────
+// ── CNN Input Buffer (flat float32 array) 
 // Shape: [WINDOW_SIZE × 6 axes] = [150 × 6] = 900 floats
 static float cnn_input[WINDOW_SIZE * 6];
 
@@ -91,7 +90,7 @@ void inferenceTask(void* pvParameters) {
       // Copy current window into flat input array
       imu.getWindowFlat(cnn_input);
 
-      // ── CNN INFERENCE ─────────────────────────────────────────────────────
+      // ── CNN INFERENCE 
       // Replace this block with your Edge Impulse model inference calls.
       // Pattern:
       //   signal_t signal;
@@ -100,7 +99,6 @@ void inferenceTask(void* pvParameters) {
       //   run_classifier(&signal, &result, false);
       //   uint8_t  top_class = argmax(result.classification);
       //   float    top_conf  = result.classification[top_class].value;
-      // ─────────────────────────────────────────────────────────────────────
 
       // Placeholder — replace with actual model output
       uint8_t top_class = GESTURE_REST;
@@ -125,7 +123,6 @@ void inferenceTask(void* pvParameters) {
   }
 }
 
-// =============================================================================
 void setup() {
   Serial.begin(115200);
   Serial.println(F("\n[A.E.G.I.S.] Transmitter booting..."));
@@ -170,7 +167,6 @@ void setup() {
   Serial.println(F("[A.E.G.I.S.] Boot complete — both cores active"));
 }
 
-// =============================================================================
 void loop() {
   // Main loop handles ESP-NOW dispatch only
   // Heavy work is on FreeRTOS tasks pinned to cores
