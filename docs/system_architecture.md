@@ -1,4 +1,4 @@
-# A.E.G.I.S. V2 — System Architecture
+# A.E.G.I.S. — System Architecture
 
 ## Hardware Wiring
 
@@ -27,14 +27,14 @@ GPIO 19 (D+)  ──────── D+ (direct wire)
 
 ```
 Core 0 — imuTask (priority 2)
-  └── vTaskDelayUntil 10ms → MPU6050 I2C read → circular buffer write
-  └── NEVER runs inference, NEVER sends ESP-NOW
+  └── vTaskDelayUntil 10ms → MPU6050 I2C read → circular buffer write.
+  └── NEVER runs inference, NEVER sends ESP-NOW.
 
 Core 1 — inferenceTask (priority 1)
-  └── reads circular buffer → flat float32 array
-  └── runs CNN → softmax → confidence check
-  └── if confidence > 92% AND gesture != REST → set gesture_ready flag
-  └── main loop picks up flag → ESP-NOW send
+  └── reads circular buffer → flat float32 array.
+  └── runs CNN → softmax → confidence check.
+  └── if confidence > 92% AND gesture != REST → set gesture_ready flag.
+  └── main loop picks up flag → ESP-NOW send.
 ```
 
 ## ESP-NOW Packet
