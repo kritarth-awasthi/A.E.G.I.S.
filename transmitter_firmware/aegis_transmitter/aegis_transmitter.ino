@@ -58,11 +58,9 @@ portMUX_TYPE      gesture_mux     = portMUX_INITIALIZER_UNLOCKED;
 // Shape: [WINDOW_SIZE × 6 axes] = [150 × 6] = 900 floats
 static float cnn_input[WINDOW_SIZE * 6];
 
-// =============================================================================
 // CORE 0 — IMU TASK
 // Polls MPU6050 at exactly 100Hz and fills circular buffer.
 // No inference, no ESP-NOW — just sensor polling.
-// =============================================================================
 void imuTask(void* pvParameters) {
   Serial.println(F("[Core 0] IMU task started"));
   TickType_t xLastWakeTime = xTaskGetTickCount();
@@ -74,11 +72,10 @@ void imuTask(void* pvParameters) {
   }
 }
 
-// =============================================================================
 // CORE 1 — INFERENCE TASK
 // Reads 150-frame window, runs float32 CNN, fires ESP-NOW on confidence pass.
 // No sensor I/O — 100% headroom for float32 matrix math.
-// =============================================================================
+
 void inferenceTask(void* pvParameters) {
   Serial.println(F("[Core 1] Inference task started"));
 
