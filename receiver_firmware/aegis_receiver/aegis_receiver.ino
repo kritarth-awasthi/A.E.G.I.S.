@@ -43,7 +43,7 @@ struct AEGISPacket {
   uint32_t timestamp_ms;
 };
 
-// ── ESP-NOW Receive Callback ──────────────────────────────────────────────────
+// ── ESP-NOW Receive Callback 
 void onDataReceived(const esp_now_recv_info_t* info,
                     const uint8_t* data, int len) {
   if (len != sizeof(AEGISPacket)) return;
@@ -62,7 +62,6 @@ void onDataReceived(const esp_now_recv_info_t* info,
   digitalWrite(LED_PIN, LOW);
 }
 
-// =============================================================================
 void setup() {
   Serial.begin(115200);
   delay(1000);
@@ -99,7 +98,6 @@ void setup() {
   Serial.println(F("[A.E.G.I.S.] Receiver ready — waiting for gestures"));
 }
 
-// =============================================================================
 void loop() {
   delay(10);  // ESP-NOW callback handles all work
 }
