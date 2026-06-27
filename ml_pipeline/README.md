@@ -28,7 +28,7 @@ FreeRTOS Core 1 having 100% headroom for float32 matrix math.
 
 ## Edge Impulse Project Settings
 
-- Input: 1500ms window, 10ms stride, 100Hz
-- DSP: Spectral Analysis block (6 axes)
-- ML: 1D Convolutional Neural Network
-- Output: float32 (unoptimized)
+- Input: 1500ms window, 10ms stride, 100Hz.
+- DSP: Spectral Analysis block (6 axes).
+- ML: 1D Convolutional Neural Network.
+- Output: float32 (unoptimized).
