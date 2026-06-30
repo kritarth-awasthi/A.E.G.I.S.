@@ -108,11 +108,11 @@ A.E.G.I.S./
 
 ## Roadmap
 
-- [x] FreeRTOS dual-core architecture
-- [x] float32 CNN inference pipeline
-- [x] ESP-NOW wireless bridge
-- [x] USB HID keyboard output
-- [ ] V2.1 — XIAO ESP32S3 miniaturisation
-- [ ] Mouse movement mode (pitch/roll → cursor)
-- [ ] Haptic feedback via LRAs
-- [ ] Flex sensor finger articulation
+- [x] FreeRTOS dual-core architecture.
+- [x] float32 CNN inference pipeline.
+- [x] ESP-NOW wireless bridge.
+- [x] USB HID keyboard output.
+- [ ] V2.1 — XIAO ESP32S3 miniaturisation.
+- [ ] Mouse movement mode (pitch/roll → cursor).
+- [ ] Haptic feedback via LRAs.
+- [ ] Flex sensor finger articulation.
