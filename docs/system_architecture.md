@@ -76,8 +76,8 @@ Safe for future expansion:
   → SPDT Slide Switch (in OUT+ line ONLY)
     → ESP32-WROOM VIN
 
-Switch placement: between TP4056 OUT+ and ESP32 VIN
-This allows battery charging while logic board is OFF.
+Switch placement: between TP4056 OUT+ and ESP32 VIN,
+This allows battery charging while logic board is OFF,
 DO NOT place switch on B+ line — bypasses TP4056 protection.
 
 Runtime: 18+ hours continuous operation
