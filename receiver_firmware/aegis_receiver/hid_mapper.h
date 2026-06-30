@@ -26,7 +26,7 @@ public:
   void begin() {
     Keyboard.begin();
     USB.begin();
-    Serial.println(F("[HID] USB HID Keyboard ready"));
+    Serial.println(F("[HID] USB HID Keyboard ready......"));
   }
 
   // Fire keystroke based on gesture ID
@@ -39,28 +39,28 @@ public:
         Keyboard.press(KEY_LEFT_ARROW);
         delay(HID_KEY_HOLD_MS);
         Keyboard.release(KEY_LEFT_ARROW);
-        Serial.println(F("[HID] ← Left Arrow"));
+        Serial.println(F("[HID] ← Left Arrow..."));
         break;
 
       case GESTURE_SWIPE_RIGHT:
         Keyboard.press(KEY_RIGHT_ARROW);
         delay(HID_KEY_HOLD_MS);
         Keyboard.release(KEY_RIGHT_ARROW);
-        Serial.println(F("[HID] → Right Arrow"));
+        Serial.println(F("[HID] → Right Arrow..."));
         break;
 
       case GESTURE_SWIPE_UP:
         Keyboard.press(KEY_UP_ARROW);
         delay(HID_KEY_HOLD_MS);
         Keyboard.release(KEY_UP_ARROW);
-        Serial.println(F("[HID] ↑ Up Arrow"));
+        Serial.println(F("[HID] ↑ Up Arrow..."));
         break;
 
       case GESTURE_SWIPE_DOWN:
         Keyboard.press(KEY_DOWN_ARROW);
         delay(HID_KEY_HOLD_MS);
         Keyboard.release(KEY_DOWN_ARROW);
-        Serial.println(F("[HID] ↓ Down Arrow"));
+        Serial.println(F("[HID] ↓ Down Arrow..."));
         break;
 
       case GESTURE_REST:
