@@ -52,9 +52,9 @@ struct AEGISPacket {
 
 ```
 150 frames × 6 axes = 900 float32 values
-Axes: ax, ay, az (accelerometer g) + gx, gy, gz (gyroscope deg/s).
+Axes: ax, ay, az (accelerometer g) + gx, gy, gz (gyroscope deg/s)
 Window: 1.5 seconds at 100Hz.
-Sliding: new inference every 100ms (not every frame).
+Sliding: new inference every 100ms (not every frame)
 ```
 
 ## ESP32-C3 Safe Pins Reference
@@ -72,13 +72,13 @@ Safe for future expansion:
 
 ```
 18650 Li-Ion (3.7V, 2000mAh)
-  → TP4056 PMIC (over-discharge protection + USB-C charging).
-  → SPDT Slide Switch (in OUT+ line ONLY).
-  → ESP32-WROOM VIN.
+  → TP4056 PMIC (over-discharge protection + USB-C charging)
+  → SPDT Slide Switch (in OUT+ line ONLY)
+  → ESP32-WROOM VIN
 
 Switch placement: between TP4056 OUT+ and ESP32 VIN,
 This allows battery charging while logic board is OFF,
-DO NOT place switch on B+ line — bypasses TP4056 protection.
+DO NOT place switch on B+ line — bypasses TP4056 protection
 
-Runtime: 18+ hours continuous operation.
+Runtime: 18+ hours continuous operation
 ```
