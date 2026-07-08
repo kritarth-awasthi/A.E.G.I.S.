@@ -92,19 +92,19 @@ A.E.G.I.S./
 
 > **Note:** The trained float32 CNN model (`aegis_model.h`) is not
 > included in this public repository. See `ml_pipeline/README.md`
-> to train your own model via Edge Impulse.
+> to train your own model via Edge Impulse
 
 ## Setup
 
 **Transmitter:**
-1. Install: `MPU6050 by Electronic Cats`, `ESP32 Arduino`.
-2. Edit `config.h` → set `RECEIVER_MAC[]` from receiver Serial output.
-3. Board: `ESP32 Dev Module` → Flash.
+1. Install: `MPU6050 by Electronic Cats`, `ESP32 Arduino`
+2. Edit `config.h` → set `RECEIVER_MAC[]` from receiver Serial output
+3. Board: `ESP32 Dev Module` → Flash
 
 **Receiver:**
-1. Open receiver sketch → Flash → note MAC address from Serial.
-2. Paste MAC into transmitter `config.h`.
-3. Board: `ESP32C3 Dev Module` with `USB CDC On Boot: Enabled`.
+1. Open receiver sketch → Flash → note MAC address from Serial
+2. Paste MAC into transmitter `config.h`
+3. Board: `ESP32C3 Dev Module` with `USB CDC On Boot: Enabled`
 
 ## Roadmap
 
