@@ -51,18 +51,18 @@ struct AEGISPacket {
 ## CNN Input Shape
 
 ```
-150 frames × 6 axes = 900 float32 values
-Axes: ax, ay, az (accelerometer g) + gx, gy, gz (gyroscope deg/s)
+150 frames × 6 axes = 900 float32 values.
+Axes: ax, ay, az (accelerometer g) + gx, gy, gz (gyroscope deg/s).
 Window: 1.5 seconds at 100Hz.
-Sliding: new inference every 100ms (not every frame)
+Sliding: new inference every 100ms (not every frame).
 ```
 
 ## ESP32-C3 Safe Pins Reference
 
 ```
 NEVER use for inputs/switches:
-  GPIO 2, 8, 9  → strapping pins (control boot mode)
-  GPIO 18, 19   → native USB D-/D+ (HID output)
+  GPIO 2, 8, 9  → strapping pins (control boot mode).
+  GPIO 18, 19   → native USB D-/D+ (HID output).
 
 Safe for future expansion:
   GPIO 0, 1, 3, 4, 5, 6, 7, 10.
