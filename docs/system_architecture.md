@@ -72,13 +72,13 @@ Safe for future expansion:
 
 ```
 18650 Li-Ion (3.7V, 2000mAh)
-  → TP4056 PMIC (over-discharge protection + USB-C charging)
-  → SPDT Slide Switch (in OUT+ line ONLY)
-  → ESP32-WROOM VIN
+  → TP4056 PMIC (over-discharge protection + USB-C charging).
+  → SPDT Slide Switch (in OUT+ line ONLY).
+  → ESP32-WROOM VIN.
 
 Switch placement: between TP4056 OUT+ and ESP32 VIN,
 This allows battery charging while logic board is OFF,
-DO NOT place switch on B+ line — bypasses TP4056 protection
+DO NOT place switch on B+ line — bypasses TP4056 protection.
 
 Runtime: 18+ hours continuous operation
 ```
