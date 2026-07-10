@@ -90,9 +90,9 @@ A.E.G.I.S./
     └── system_architecture.md
 ```
 
-> **Note:** The trained float32 CNN model (`aegis_model.h`) is not
-> included in this public repository. See `ml_pipeline/README.md`
-> to train your own model via Edge Impulse
+> **Note:** The trained float32 CNN model (`aegis_model.h`) is not.
+> included in this public repository. See `ml_pipeline/README.md`.
+> to train your own model via Edge Impulse.
 
 ## Setup
 
