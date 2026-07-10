@@ -2,14 +2,14 @@
 
 ## Training Workflow
 
-1. Flash transmitter firmware with data-collection Serial output enabled
-2. Run `collect_data.py` for each gesture (50+ samples each)
-3. Upload CSVs to Edge Impulse project
-4. Configure: Spectral Features DSP + 1D Conv Neural Network
-5. **Select float32 (Unoptimized) — NOT int8** (see below)
-6. Train and validate — target >95% accuracy
-7. Deploy → Arduino Library → extract model header
-8. Include `aegis_model.h` in transmitter firmware
+1. Flash transmitter firmware with data-collection Serial output enabled.
+2. Run `collect_data.py` for each gesture (50+ samples each).
+3. Upload CSVs to Edge Impulse project.
+4. Configure: Spectral Features DSP + 1D Conv Neural Network.
+5. **Select float32 (Unoptimized) — NOT int8** (see below).
+6. Train and validate — target >95% accuracy.
+7. Deploy → Arduino Library → extract model header.
+8. Include `aegis_model.h` in transmitter firmware.
 
 ## Why float32, NOT int8
 
