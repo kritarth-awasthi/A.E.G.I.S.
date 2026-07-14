@@ -20,11 +20,11 @@ FreeRTOS Core 1 having 100% headroom for float32 matrix math.
 
 ## Gesture Classes (in this order for Edge Impulse labels)
 
-0. rest
-1. swipe_left
-2. swipe_right
-3. swipe_up
-4. swipe_down
+0. rest.
+1. swipe_left.
+2. swipe_right.
+3. swipe_up.
+4. swipe_down.
 
 ## Edge Impulse Project Settings
 
